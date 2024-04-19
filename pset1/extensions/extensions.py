@@ -1,4 +1,4 @@
-filetype = input("file nmae: ")
+filetype = input("file name: ")
 
 if filetype.endswith(".gif"):
    print(filetype,"/gif")
