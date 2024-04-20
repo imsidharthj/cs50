@@ -6,4 +6,4 @@ def remove_vowels(text):
 
 text = input("Input: ")
 output = remove_vowels(text)
-print("Output: ",output)
+print("Output:",output)
