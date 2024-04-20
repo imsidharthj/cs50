@@ -1,4 +1,7 @@
-camelString = input("camelCase: ")
+def main():
+     camelString = input("camelCase: ")
+     snake_case = camel_to_sanke(camelString)
+     print("snake_case: ", snake_case)
 
 def camel_to_sanke(camelString):
  snake = ""
@@ -9,6 +12,5 @@ def camel_to_sanke(camelString):
          snake = snake + i
  return snake
 
-snake_case = camel_to_sanke(camelString)
-
-print("snake_case: ", snake_case)
+if __name__ == "__main__":
+     main()
