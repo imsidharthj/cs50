@@ -9,16 +9,14 @@ menu = {
     "Taco": 3.00,
     "Tortilla Salad": 8.00
 }
-def get_input():
+def calculate():
     total = 0
-    for item,cost in menu.items():
-        print(item, cost, sep = ", ")
     while True:
         try:
             item = input("Item: ").title()
             if item in menu:
                 total = total + menu[item]
-                print("Total: ",total)
+                print(f"Total: ${total:.2f}")
             else:
                 print("Invalid input\n")
         except KeyError:
@@ -27,7 +25,6 @@ def get_input():
         except EOFError:
             print("\n")
             break
-    return total
 
-total_cost = get_input()
-print(f"${total_cost:.2f}")
+if __name__ == "__main__":
+    calculate()
