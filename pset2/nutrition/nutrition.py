@@ -8,7 +8,7 @@ fruits = {
 
 def main():
     item = input("Item: ")
-    fruit = item.lower()
+    fruit = item.lower().strip()
     fruit = fruit.capitalize()
     if fruit in fruits:
         print("Calories: ", fruits[fruit])
