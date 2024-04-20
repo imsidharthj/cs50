@@ -1,18 +1,20 @@
-filetype = input("file name: ")
+def main():
+   filetype = input("file name: ").lower().strip()
 
-if filetype.endswith(".gif"):
-   print(filetype,"/gif")
-elif filetype.endswith(".jpg"):
-   print(filetype,"/jpg")
-elif filetype.endswith(".jpeg"):
-   print(filetype,"/jpeg")
-elif filetype.endswith(".png"):
-   print(filetype,"/png")
-elif filetype.endswith(".pdf"):
-   print(filetype,"/pdf")
-elif filetype.endswith(".txt"):
-   print(filetype,"/txt")
-elif filetype.endswith(".zip"):
-   print(filetype,"/zip")
-else :
-   print("application/octet-stream")
+   if filetype.endswith(".gif"):
+      print("image/gif")
+   elif filetype.endswith(".jpg"):
+      print("image/jpeg")
+   elif filetype.endswith(".jpeg"):
+      print("image/jpeg")
+   elif filetype.endswith(".png"):
+      print("image/png")
+   elif filetype.endswith(".pdf"):
+      print("application/pdf")
+   elif filetype.endswith(".txt"):
+      print("text/plain")
+   elif filetype.endswith(".zip"):
+      print("application/zip")
+   else :
+      print("application/octet-stream")
+main()
