@@ -14,29 +14,28 @@ from pyfiglet import Figlet
 import random
 import sys
 
-def check_font(text):
+
+if __name__=="__main__":
+    if len(sys.argv) != 3 and len(sys.argv) != 1:
+        print("Invalid usage")
+        sys.exit(1)
     figlet = Figlet()
+    output = ""
     if len(sys.argv) == 1:
         font = random.choice(figlet.getFonts())
         figlet.setFont(font=font)
-        return figlet.renderText(text)
     elif len(sys.argv) == 3:
-        if sys.argv[1].lower() in ("-f", "--font"):
-            font_name = sys.argv[2]
-            if font_name in figlet.getFonts():
-                figlet.setFont(font=font_name)
-                return figlet.renderText(text)
-            else:
-                print(f"Error: '{font_name}'")
-                sys.exit(1)
-        else:
-            print(f"Error: ")
+        if sys.argv[1] not in ["-f", "--font"]:
+            print("Invalid usage")
             sys.exit(1)
+        font_name = sys.argv[2]
+        if font_name not in figlet.getFonts():
+            print("Invalid usage")
+            sys.exit(1)
+        figlet.setFont(font=font_name)
     else:
-        print("Error")
+        print("Invalid usage")
         sys.exit(1)
-
-if __name__=="__main__":
     input_str = input("Input: ")
-    change_font = check_font(input_str)
-    print("Output: ", change_font)
+    output = figlet.renderText(input_str)
+    print("Output: ", output)
