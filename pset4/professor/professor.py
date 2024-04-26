@@ -17,13 +17,19 @@ def get_level():
 def generate_integer(level):
     counter = 0
     for i in range(10):
-        x = random.randint(0, 10**level-1)
-        y = random.randint(0, 10**level-1)
+        if level == 1:
+            x = random.randint(0, 10**level-1)
+            y = random.randint(0, 10**level-1)
+        elif level == 2:
+            x = random.randint(10, 10**level-1)
+            y = random.randint(10, 10**level-1)
+        else:
+            x = random.randint(100, 10**level-1)
+            y = random.randint(100, 10**level-1)
         problem = f"{x} + {y} = "
         result = int(x) + int(y)
         for j in range(3):
-            print(problem)
-            solution = input()
+            solution = input(problem)
             try:
                 solution = int(solution)
                 if solution == result:
