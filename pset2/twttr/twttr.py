@@ -1,9 +1,13 @@
-def remove_vowels(text):
+def main():
+    text = input("Input: ")
+    output = shorten(text)
+    print("Output:",output)
+
+def shorten(word):
  vowels = "aeiouAEIOU"
  for vowel in vowels:
-  text = text.replace(vowel,"")
- return text
+  word = word.replace(vowel,"")
+ return word
 
-text = input("Input: ")
-output = remove_vowels(text)
-print("Output:",output)
+if __name__ == "__main__":
+  main()
