@@ -1,0 +1,14 @@
+from numb3rs import validate
+def test_validate():
+    assert validate(r"1.2.3.4") == True
+    assert validate(r"127.0.0") == False
+    assert validate(r"1.2") == False
+    assert validate(r"1") == False
+    assert validate(r"cat") == False
+    assert validate(r"512.512.512.512.512") == False
+
+def test_cases():
+    assert validate(r"255.255.255.255") == True
+    assert validate(r"1.275.1.1") == False
+    assert validate(r"1.1.275.1") == False
+    assert validate(r"1.1.1.275") == False
