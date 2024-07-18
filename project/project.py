@@ -5,9 +5,14 @@ import readline
 from tabulate import tabulate
 
 
+def main():
+    diseases_dict = load_disease_data('dataset.csv')  # Read dataset and extract unique symptoms
+    readline.parse_and_bind("tab: complete")  # Bind the Tab key to autocomplete
+    readline.set_completer(auto_completer)  # Set the completer function for autocomplete
+    handle_patient_data(diseases_dict)
+
+
 unique_symptoms = set()
-
-
 # It reads CSV file and convert each row into a dictionary entry where each disease 
 # is a key and its symptoms are stored as a list of values.
 def load_disease_data(csv_file_path):
@@ -98,29 +103,28 @@ def handle_patient_data(diseases_dict):
     
     while True:
         patient_symptoms = [symptom.strip().lower().replace('_', ' ') for symptom in input("Symptoms: ").split(',')]
-        patient_data['symptoms'].extend(patient_symptoms)  # Add the entered symptoms to the patient's data
+        if len(patient_symptoms) < 3:
+            print("Please enter minimum three symptoms")
+            continue
+        # patient_data['symptoms'].extend(patient_symptoms)  Add the entered symptoms to the patient's data
+        patient_data["symptoms"] = patient_symptoms
         matched_diseases = match_symptoms(diseases_dict, patient_data['symptoms'])  # Match the symptoms to diseases
-        print("\n--- Patient Data ---")
-        print(tabulate([["Name", patient_data['name']], 
-                        ["Age", patient_data['age']], 
-                        ["Symptoms", ", ".join(patient_data['symptoms'])]], 
-                    headers=["Field", "Value"], tablefmt="grid"))
-        print("\n--- Matched Diseases ---")
         if matched_diseases:
+            print("\n--- Patient Data ---")
+            print(tabulate([["Name", patient_data['name']], 
+                            ["Age", patient_data['age']], 
+                            ["Symptoms", ", ".join(patient_data['symptoms'])]], 
+                        headers=["Field", "Value"], tablefmt="grid"))
+            print("\n--- Matched Diseases ---")
             print(tabulate([[disease] for disease in matched_diseases], headers=["Diseases"], tablefmt="grid"))
+            more_symptoms = input("Do you want to add another diagnosis? (yes/no): ").strip().lower()
+            if more_symptoms != 'yes':
+                break
         else:
             print("No diseases matched the entered symptoms.")
-        more_symptoms = input("Do you want to add another diagnosis? (yes/no): ").strip().lower()
-        if more_symptoms != 'yes':
-            break
+            patient_data["symptoms"] = []
+            print("Enter the symptoms again")
     patient_data = None
-
-
-def main():
-    diseases_dict = load_disease_data('dataset.csv')  # Read dataset and extract unique symptoms
-    readline.parse_and_bind("tab: complete")  # Bind the Tab key to autocomplete
-    readline.set_completer(auto_completer)  # Set the completer function for autocomplete
-    handle_patient_data(diseases_dict)
 
 
 # The match_symptoms function checks if all symptoms in the customer_input list 
